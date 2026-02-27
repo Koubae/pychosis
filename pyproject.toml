@@ -1,0 +1,158 @@
+[project]
+name = "pychosis"
+version = "0.1.0-dev"
+description = "Python's psychosis projects"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
+
+
+[dependency-groups]
+dev = [
+    "mypy>=1.18.2",
+    "pytest>=8.4.2",
+    "pytest-asyncio>=1.2.0",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.14.2",
+]
+
+[tool.setuptools]
+py-modules = []
+# -----------------------------------------------------------
+#       RUFF | Lint + Formatter + Import Sorter
+# -----------------------------------------------------------
+[tool.ruff]
+line-length = 120
+target-version = "py314"
+src = ["src"]
+extend-exclude = [".venv", ".git", "docs", "migrations", "examples"]
+
+[tool.ruff.format]
+quote-style = "preserve"
+indent-style = "space"
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = [
+    "E", # pycodestyle
+    "F", # pyflakes
+    "I", # isort
+    "RUF", # RUF: Ruff-specific improvements
+    "D", # pydocstyle
+    "S"     # bandit (security)
+
+]
+
+ignore = [
+    "D1", # disable docstring required rules project-wide
+    "S104",
+    "S324",
+    "F821",
+    "S603",
+    "RUF005", # RUF005 Consider iterable unpacking instead of concatenation
+    "S311"  # suspicious-non-cryptographic-random-usage https://docs.astral.sh/ruff/rules/suspicious-non-cryptographic-random-usage/#suspicious-non-cryptographic-random-usage-s311
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Allow unused imports in __init__ files as these are convenience imports
+"**/__init__.py" = ["F401"]
+"**/tests/**/*" = ["S101", "S105", "S106", "D", "T20", "PLR0913"]
+"scripts/*" = ["T20", "RUF005"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]
+lines-after-imports = 2
+combine-as-imports = true
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+# -----------------------------------------------------------
+#       mypy | type checks
+# -----------------------------------------------------------
+[tool.mypy]
+python_version = "3.14"
+
+exclude = [
+    "migrations/",
+    'tests/',
+    ".venv",
+    "scripts/",
+]
+disable_error_code = ["arg-type", "attr-defined", "var-annotated", "unused-ignore"]
+show_error_codes = true
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true        # force type hints on functions
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+pretty = true
+
+# Don't force test functions to include types.
+[[tool.mypy.overrides]]
+module = [
+    "*.tests.*",
+]
+disallow_untyped_defs = false
+check_untyped_defs = false
+disable_error_code = ["type-arg", "no-untyped-def"]
+
+# Ignore errors from packages that don't have type annotations.
+[[tool.mypy.overrides]]
+module = [
+    "fastapi.*",
+]
+ignore_missing_imports = true
+
+
+
+# -----------------------------------------------------------
+#      Pytest
+# -----------------------------------------------------------
+[tool.pytest.ini_options]
+minversion = "8.0"
+pythonpath = [
+    ".",
+    "src",
+]
+testpaths = ["tests", "src"]
+
+asyncio_mode = "strict"
+asyncio_default_fixture_loop_scope = "session"
+addopts = [
+    "--tb=short",
+    "--disable-warnings",
+    "--verbose",
+    "--capture=no",
+    "--color=auto"
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "unit: fast unit tests",
+    "integration: integration tests",
+    "e2e: end-to-end tests"
+]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+omit = [
+    "*/main.py",
+    "*/__init__.py",
+    "*/tests/*",
+    "*/scripts/*",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 85

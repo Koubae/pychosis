@@ -1,7 +1,7 @@
 [project]
-name = "pychosis"
+name = "pychosis-create-app"
 version = "0.1.0-dev"
-description = "Python's psychosis projects"
+description = "This is a tool to create a Pychosis Project scaffolding app."
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = []
@@ -161,3 +161,4 @@ fail_under = 85
 members = [
     "tools/pychosis-create-app",
 ]
+

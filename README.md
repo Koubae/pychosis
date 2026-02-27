@@ -1,2 +1,6 @@
-# pychosis
-Python's psychosis projects 🤪🤪🤪🤯🤯🤯💥💥💥
+pychosis
+=========
+
+
+_Python's psychosis projects 🤪🤪🤪🤯🤯🤯💥💥💥_
+

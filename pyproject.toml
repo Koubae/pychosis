@@ -6,6 +6,12 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = []
 
+[tool.uv.workspace]
+members = [
+    "experiments/apps/*",
+    "tools/*",
+]
+exclude = []
 
 [dependency-groups]
 dev = [
@@ -157,7 +163,3 @@ show_missing = true
 skip_covered = true
 fail_under = 85
 
-[tool.uv.workspace]
-members = [
-    "tools/pychosis-create-app",
-]

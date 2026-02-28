@@ -4,7 +4,10 @@ version = "0.1.0-dev"
 description = "This is a tool to create a Pychosis Project scaffolding app."
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "dotenv>=0.9.9",
+    "textual>=8.0.0",
+]
 
 
 [dependency-groups]
@@ -156,9 +159,3 @@ omit = [
 show_missing = true
 skip_covered = true
 fail_under = 85
-
-[tool.uv.workspace]
-members = [
-    "tools/pychosis-create-app",
-]
-

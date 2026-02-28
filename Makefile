@@ -41,7 +41,7 @@ update-venv: lock sync
 lock:
 	@uv lock
 sync:
-	@uv sync --dev
+	@uv sync --dev --all-packages
 
 .install-uv:
 	pip install -U uv

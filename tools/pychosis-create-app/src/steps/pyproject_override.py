@@ -1,26 +1,15 @@
-[project]
-name = "pychosis"
-version = "0.1.0-dev"
-description = "Python's psychosis projects"
-readme = "README.md"
-requires-python = ">=3.14"
-dependencies = []
+from pathlib import Path
 
-[tool.uv.workspace]
-members = [
-    "experiments/apps/*",
-    "tools/*",
-    "experiments/example-1",
-]
-exclude = ["experiments/apps/sub_app", "experiments/apps/sub_app/*"]
+from constants import console
+
+
+def step_pyproject_override(project_path: Path) -> None:
+    console.log(f"Modifing default 'pyproject.toml' in {project_path}")
+    with open(project_path / 'pyproject.toml', 'a') as f:
+        f.write("""
 
 [dependency-groups]
 dev = [
-    "mypy>=1.18.2",
-    "pytest>=8.4.2",
-    "pytest-asyncio>=1.2.0",
-    "pytest-cov>=7.0.0",
-    "ruff>=0.14.2",
 ]
 
 [tool.setuptools]
@@ -162,5 +151,5 @@ omit = [
 [tool.coverage.report]
 show_missing = true
 skip_covered = true
-fail_under = 85
-
+fail_under = 85            
+""")

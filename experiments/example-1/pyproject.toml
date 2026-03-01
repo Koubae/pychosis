@@ -1,26 +1,14 @@
 [project]
-name = "pychosis"
-version = "0.1.0-dev"
-description = "Python's psychosis projects"
+name = "example-1"
+version = "0.1.0"
+description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = []
 
-[tool.uv.workspace]
-members = [
-    "experiments/apps/*",
-    "tools/*",
-    "experiments/example-1",
-]
-exclude = ["experiments/apps/sub_app", "experiments/apps/sub_app/*"]
 
 [dependency-groups]
 dev = [
-    "mypy>=1.18.2",
-    "pytest>=8.4.2",
-    "pytest-asyncio>=1.2.0",
-    "pytest-cov>=7.0.0",
-    "ruff>=0.14.2",
 ]
 
 [tool.setuptools]
@@ -143,7 +131,7 @@ addopts = [
     "--color=auto"
 ]
 markers = [
-    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "slow: marks tests as slow (deselect with '-m "not slow"')",
     "unit: fast unit tests",
     "integration: integration tests",
     "e2e: end-to-end tests"
@@ -162,5 +150,4 @@ omit = [
 [tool.coverage.report]
 show_missing = true
 skip_covered = true
-fail_under = 85
-
+fail_under = 85            

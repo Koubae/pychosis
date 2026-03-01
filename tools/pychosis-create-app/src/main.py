@@ -2,15 +2,11 @@ import os
 from pathlib import Path
 
 from dotenv import find_dotenv, load_dotenv
-from rich import pretty
-from rich.console import Console
 from rich.prompt import Prompt
 
+from constants import console
+from steps.pyproject_override import step_pyproject_override
 from tree_selector import TreeSelectorApp
-
-
-pretty.install()
-console = Console(color_system="truecolor", force_terminal=True)
 
 
 def main() -> None:
@@ -37,6 +33,17 @@ def main() -> None:
             style="white on red",
         )
         quit(1)
+
+    project_path.mkdir(parents=True)
+
+    # Run 'uv init' inside the project_path
+    with console.status(f"[bold purple]Creating PyChosis Project using uv in {project_path}...[/]"):
+        result = os.system(f'cd "{project_path}" && uv init')
+        if result != 0:
+            console.print(f"[bold red]ERROR:[/] Failed to run 'uv init' in {project_path}", style="white on red")
+            quit(1)
+
+        step_pyproject_override(project_path)
 
 
 if __name__ == "__main__":

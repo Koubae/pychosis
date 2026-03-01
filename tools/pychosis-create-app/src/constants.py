@@ -22,3 +22,5 @@ console = Console(color_system="truecolor", force_terminal=True)
 
 ROOT_PATH = Path.cwd()
 TEMPLATES_PATH = ROOT_PATH / "templates"
+
+PYTHON_SUPPORTED_VERSIONS = ("3.14", "3.13", "3.12", "3.11", "3.10", "3.9", "3.8", "3.7")

@@ -4,7 +4,7 @@ from constants import TEMPLATES_PATH, console
 
 
 def step_git_setup(project_path: Path) -> None:
-    console.log("[bold yellow][STEP]:[/] setting up git for this project")
+    console.rule("💥 Git Setup 💥")
 
     with open(project_path / ".gitattributes", "w") as f:
         with open(TEMPLATES_PATH / ".gitattributes", "r") as template_f:

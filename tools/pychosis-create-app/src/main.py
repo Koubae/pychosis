@@ -6,14 +6,15 @@ from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
 from rich.prompt import Prompt
 
-from constants import console
-from steps import step_git_setup, step_pyproject_override
+from constants import PYTHON_SUPPORTED_VERSIONS, console
+from steps import step_git_setup, step_pyproject_override, step_python_setup
 from tree_selector import TreeSelectorApp
 
 
 def main() -> None:
     load_dotenv(find_dotenv(), override=False)
 
+    python_default_version = os.getenv("PYTHON_DEFAULT_VERSION", "3.14")
     pychosis_root_directory_path = os.getenv("PYCHOSIS_ROOT_DIRECTORY")
     if not pychosis_root_directory_path:
         raise RuntimeError("PYCHOSIS_ROOT_DIRECTORY environment variable is not set")
@@ -31,6 +32,11 @@ def main() -> None:
 
     project_name = Prompt.ask("[bold cyan]Enter your project's name[/]")
     console.print(f"New Project name: {project_name}", style="bold green")
+
+    python_version = Prompt.ask(
+        "[bold green]Python Version[/]", default=python_default_version, choices=PYTHON_SUPPORTED_VERSIONS
+    )
+    console.print(f"Python version selected: {python_version}", style="bold yellow")
 
     project_path = Path(project_dir_selected) / project_name
     if project_path.exists():
@@ -56,6 +62,7 @@ def main() -> None:
 
         step_pyproject_override(project_path)
         step_git_setup(project_path)
+        step_python_setup(project_path, python_version)
 
 
 if __name__ == "__main__":

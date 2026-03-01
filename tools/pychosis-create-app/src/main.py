@@ -5,7 +5,7 @@ from dotenv import find_dotenv, load_dotenv
 from rich.prompt import Prompt
 
 from constants import console
-from steps.pyproject_override import step_pyproject_override
+from steps import step_git_setup, step_pyproject_override
 from tree_selector import TreeSelectorApp
 
 
@@ -44,6 +44,7 @@ def main() -> None:
             quit(1)
 
         step_pyproject_override(project_path)
+        step_git_setup(project_path)
 
 
 if __name__ == "__main__":

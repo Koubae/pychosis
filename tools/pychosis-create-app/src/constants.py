@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from rich import pretty
 from rich.console import Console
 
@@ -17,3 +19,6 @@ BRANCH_STYLE_BY_TYPE = {
 
 pretty.install()
 console = Console(color_system="truecolor", force_terminal=True)
+
+ROOT_PATH = Path.cwd()
+TEMPLATES_PATH = ROOT_PATH / "templates"

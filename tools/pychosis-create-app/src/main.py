@@ -1,4 +1,6 @@
 import os
+import shutil
+import subprocess
 from pathlib import Path
 
 from dotenv import find_dotenv, load_dotenv
@@ -15,6 +17,10 @@ def main() -> None:
     pychosis_root_directory_path = os.getenv("PYCHOSIS_ROOT_DIRECTORY")
     if not pychosis_root_directory_path:
         raise RuntimeError("PYCHOSIS_ROOT_DIRECTORY environment variable is not set")
+
+    uv_path = shutil.which("uv")
+    if not uv_path:
+        raise RuntimeError("uv executable not found in PATH")
 
     with console.status("[bold purple]Creating Pychosis Project App...[/]"):
         pychosis_root_directory = Path(pychosis_root_directory_path)
@@ -38,8 +44,13 @@ def main() -> None:
 
     # Run 'uv init' inside the project_path
     with console.status(f"[bold purple]Creating PyChosis Project using uv in {project_path}...[/]"):
-        result = os.system(f'cd "{project_path}" && uv init')
-        if result != 0:
+        result = subprocess.run(
+            [uv_path, "init"],
+            cwd=project_path,
+            check=False,
+        )
+
+        if result.returncode != 0:
             console.print(f"[bold red]ERROR:[/] Failed to run 'uv init' in {project_path}", style="white on red")
             quit(1)
 

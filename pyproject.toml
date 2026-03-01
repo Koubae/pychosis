@@ -11,7 +11,7 @@ members = [
     "experiments/apps/*",
     "tools/*",
 ]
-exclude = []
+exclude = ["experiments/apps/sub_app", "experiments/apps/sub_app/*"]
 
 [dependency-groups]
 dev = [

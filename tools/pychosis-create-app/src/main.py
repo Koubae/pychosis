@@ -1,13 +1,10 @@
 import os
-from dotenv import load_dotenv, find_dotenv
 from pathlib import Path
 
+from dotenv import find_dotenv, load_dotenv
 from rich import pretty
 from rich.console import Console
-from rich import print
-from rich.filesize import decimal
 from rich.markup import escape
-from rich.text import Text
 from rich.tree import Tree
 
 
@@ -27,9 +24,9 @@ BRANCH_STYLE_BY_TYPE = {
 pretty.install()
 console = Console(color_system="truecolor", force_terminal=True)
 
+
 def main():
     load_dotenv(find_dotenv(), override=False)
-
 
     pychosis_root_directory_path = os.getenv("PYCHOSIS_ROOT_DIRECTORY")
     if not pychosis_root_directory_path:
@@ -52,6 +49,7 @@ def main():
 
         # import time
         # time.sleep(2)
+
 
 def _add_pychosis_project_recursive(path: Path, projects: list[Path], tree: Tree, branch_style: str = "") -> None:
     if not path.is_dir():

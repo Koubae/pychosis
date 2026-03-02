@@ -3,10 +3,15 @@ import os
 
 from fastapi import FastAPI
 
+from src.app.api.router import get_router
+
 
 def create_app() -> FastAPI:
     setup()
     app = FastAPI()
+
+    router = get_router()
+    app.include_router(router)
     return app
 
 

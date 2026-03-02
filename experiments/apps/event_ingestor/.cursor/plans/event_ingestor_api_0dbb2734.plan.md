@@ -7,7 +7,7 @@ todos:
     status: completed
   - id: port
     content: Define EventStorePort protocol in src/ports/
-    status: pending
+    status: completed
   - id: adapter
     content: Implement InMemoryEventStore in src/adapters/
     status: pending

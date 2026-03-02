@@ -13,6 +13,7 @@ Code Style
 
 * pep 8 
 * Always add typing
+* DO NOT add doc-string on top of python module
 
 
 Architecture

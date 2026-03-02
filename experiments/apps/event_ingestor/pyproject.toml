@@ -4,7 +4,10 @@ version = "0.1.0-dev"
 description = "Pychosis: Event Ingestor "
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+]
 
 
 [dependency-groups]

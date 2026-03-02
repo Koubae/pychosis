@@ -10,15 +10,25 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "justMyCode": true
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}:${workspaceFolder}/src"
+            }
         },
         {
             "name": "Run App",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/src/main.py",
             "console": "integratedTerminal",
-            "justMyCode": true
+            "justMyCode": true,
+            "module": "fastapi",
+            "args": [
+                "dev",
+                "${workspaceFolder}/src/main.py"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}:${workspaceFolder}/src"
+            }
         }
     ]
 }

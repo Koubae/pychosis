@@ -40,3 +40,9 @@ Answers
 -------
 
 * responses should be concise and brief as much as possible.
+
+Testing
+-------
+
+* Always use Pytest
+* For mock always use `unittest.mock` or patch
